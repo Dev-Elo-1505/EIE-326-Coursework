@@ -8,11 +8,13 @@ def calculate_gpa(points):
     for i in range(len(points)):
         total_quality_points += points[i]['grade'] * points[i]['credit_unit']
         total_credit_units += points[i]['credit_unit']
-    print(total_quality_points/total_credit_units)
+    gpa=total_quality_points/total_credit_units
+    return round(gpa, 2)
         
     
 
-calculate_gpa(scores)
+gpa = calculate_gpa(scores)
+print("GPA:", gpa)
 
 
 
