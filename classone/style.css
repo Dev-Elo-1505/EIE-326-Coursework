@@ -41,6 +41,7 @@ th {
 
 tr td:first-child {
   font-size: 2.4rem;
+  color: blue;
 }
 
 tr td:last-child {
