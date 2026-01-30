@@ -1,98 +1,129 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image, ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Link } from "expo-router";
+import { ThemedText } from "@/components/themed-text";
+import { ResponsiveWrapper } from "@/components/ui/ResponsiveWrapper";
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
-
-export default function HomeScreen() {
+const HomeScreen = () => {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    <SafeAreaView style={styles.container}>
+      <ResponsiveWrapper>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.header}>
+            <ThemedText type="title" style={styles.title}>Toolbox 🛠️</ThemedText>
+            <ThemedText style={styles.subtext}>Your daily essentials, made fun.</ThemedText>
+          </View>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+          <View style={styles.grid}>
+            <Link href="/calculator" asChild>
+              <Pressable style={StyleSheet.flatten([styles.card, { backgroundColor: '#E3F2FD' }])}>
+                <Text style={styles.cardEmoji}>🧮</Text>
+                <Text style={styles.cardTitle}>Calculator</Text>
+                <Text style={styles.cardSub}>Precision tool</Text>
+              </Pressable>
+            </Link>
+
+            <Link href={"/weight-converter" as any} asChild>
+              <Pressable style={StyleSheet.flatten([styles.card, { backgroundColor: '#F3E5F5' }])}>
+                <Image 
+                  source={require('@/assets/images/weight_scale.png')} 
+                  style={styles.cardIcon}
+                />
+                <Text style={styles.cardTitle}>Weighty!</Text>
+                <Text style={styles.cardSub}>Bouncy units</Text>
+              </Pressable>
+            </Link>
+
+            <Link href={"/budget" as any} asChild>
+              <Pressable style={StyleSheet.flatten([styles.card, { backgroundColor: '#E8F5E9' }])}>
+                <Text style={styles.cardEmoji}>💰</Text>
+                <Text style={styles.cardTitle}>Budget</Text>
+                <Text style={styles.cardSub}>Meta style</Text>
+              </Pressable>
+            </Link>
+
+            <Link href={"/editor" as any} asChild>
+              <Pressable style={StyleSheet.flatten([styles.card, { backgroundColor: '#FFF3E0' }])}>
+                <Text style={styles.cardEmoji}>📝</Text>
+                <Text style={styles.cardTitle}>Editor</Text>
+                <Text style={styles.cardSub}>Notion style</Text>
+              </Pressable>
+            </Link>
+
+            <Link href={"/news" as any} asChild>
+              <Pressable style={StyleSheet.flatten([styles.card, { backgroundColor: '#FCE4EC' }])}>
+                <Text style={styles.cardEmoji}>📰</Text>
+                <Text style={styles.cardTitle}>News</Text>
+                <Text style={styles.cardSub}>Daily feed</Text>
+              </Pressable>
+            </Link>
+          </View>
+        </ScrollView>
+      </ResponsiveWrapper>
+    </SafeAreaView>
   );
-}
+};
+
+export default HomeScreen;
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    padding: 20,
   },
-  stepContainer: {
-    gap: 8,
+  header: {
+    marginVertical: 40,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: "900",
+    marginBottom: 8,
+    textAlign: "center",
+  },
+  subtext: {
+    fontSize: 16,
+    textAlign: "center",
+    opacity: 0.7,
+  },
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginHorizontal: -8, // Offset card margins
+  },
+  card: {
+    width: '43%', // Slightly reduced to accommodate margins
+    margin: 8,
+    aspectRatio: 0.9,
+    padding: 16,
+    borderRadius: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 3,
+    borderColor: '#000',
+    shadowColor: '#000',
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+  },
+  cardEmoji: {
+    fontSize: 40,
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  cardIcon: {
+    width: 50,
+    height: 50,
+    marginBottom: 8,
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: '900',
+  },
+  cardSub: {
+    fontSize: 12,
+    opacity: 0.6,
+    textAlign: 'center',
   },
 });

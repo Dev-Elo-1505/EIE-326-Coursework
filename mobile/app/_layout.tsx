@@ -16,6 +16,11 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="calculator/index" options={{ title: 'Calculator' }} />
+        <Stack.Screen name="weight-converter/index" options={{ title: 'Weighty!' }} />
+        <Stack.Screen name="budget/index" options={{ title: 'Finance' }} />
+        <Stack.Screen name="editor/index" options={{ title: 'Drafts' }} />
+        <Stack.Screen name="news/index" options={{ title: 'Horizon' }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
       </Stack>
       <StatusBar style="auto" />

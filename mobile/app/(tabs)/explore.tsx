@@ -26,6 +26,7 @@ export default function TabTwoScreen() {
           type="title"
           style={{
             fontFamily: Fonts.rounded,
+            marginRight: 8, // Space after title
           }}>
           Explore
         </ThemedText>
@@ -107,6 +108,5 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     flexDirection: 'row',
-    gap: 8,
   },
 });
